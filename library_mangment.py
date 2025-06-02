@@ -39,6 +39,18 @@ def safe_float(prompt):
         return None    
  
 
+def search_book():
+    search_book=input("Search . . . . \n")
+    if search_book in Books:
+        print("------------------------------------")
+        print(f"📖Title:{search_book.title()} ")        
+        for key,value in Books[search_book].items():
+         print(f"{key}: {value}")
+        print("------------------------------------")
+    else:
+        print("Sorry, we dont have this book") 
+        wanted.append(search_book)   
+        
 def Add_book():
         global Books
         B_name=input("Enter the book name please \n").capitalize().strip()
@@ -163,10 +175,12 @@ def show_list() :
 while True:
      
     print("1- Add a book")
-    print("2-Take a book")
+    print("2-Borrow a book")
     print("3-Return a book")
     print("4-Take a look at our list")
-    print("5-Exit and save")
+    print("5-Search by name ")
+    print("6-Remove a book")
+    print("7-Exit and save\n")
       
     Choice=(input("Choose from 1 to 5 :  \n").strip())
    
@@ -185,9 +199,19 @@ while True:
         elif int(Choice)==4:
             Clear()
             show_list()
-        elif int(Choice)==5:                        
-            Clear()
-            
+        
+        elif int(Choice)==5:
+            search_book()
+        
+        elif int(Choice)==6:         
+            try:
+                del Books[input("\nName the book you wants to remove\n ").strip()]
+            except:
+                print("Wrong input, We may dont have this book")
+                
+        elif int(Choice)==7:                        
+            Clear()            
+            dump() 
             break
            
         else:
